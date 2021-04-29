@@ -1,0 +1,19 @@
+% user, private
+
+# Show ZSH alias
+zalias
+
+# Show ZSH keys
+zkeys
+
+# Download some wallpapers
+download_wallpapers
+
+# Save GPG keys into disk
+gpg-backup-keys
+
+# Launch polyar in all MONITORS
+launch_polybar
+
+# Show currently music playerd (used by polybar)
+player-status
