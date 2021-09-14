@@ -1,3 +1,7 @@
+% network, system
+# Get public ip
+curl checkip.amazonaws.com
+
 % pv, system
 # Count line rate
 pv --line-mode --rate
