@@ -1,6 +1,6 @@
 % network, system
 # Get public ip
-curl checkip.amazonaws.com
+curl ifconfig.me
 
 % pv, system
 # Count line rate
