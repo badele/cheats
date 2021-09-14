@@ -1,0 +1,6 @@
+% encrypt, cryptsetup, luks, system
+
+# open disk
+cryptsetup luksOpen /dev/disk/by-label/<disk_name> <disk_name>
+
+$ disk_name: blkid | blkid | grep 'TYPE="crypto_LUKS"' | pcregrep -o1 ' LABEL="(.*?)"'

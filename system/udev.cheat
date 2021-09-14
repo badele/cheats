@@ -1,0 +1,15 @@
+% udev, system
+# Monitoring udev events
+udevadm monitor
+
+# Get udev device informations
+udevadm info -a -p <sys_class> | head -16
+
+# Load udev rules 
+udevadm control --reload-rules
+
+# Test rule
+udevadm test $(udevadm info --query=path --name=device_name)
+
+# run rules
+udevadm trigger

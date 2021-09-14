@@ -1,0 +1,4 @@
+% disk, file, system
+
+# Show deleted file, but not not linked (deleted)
+lsof -a +L1
