@@ -1,30 +1,34 @@
-# Count line rate
 % pv, system
+# Count line rate
 pv --line-mode --rate
 
-# Get all hardwares informations
 % hardware
+# Get all hardwares informations
 inxi -F
 
 # Show PCI device with kernel modules used
 lspci -k
 
-# Get x11 keyssym
 % xwindow, keyboard
+# Get x11 keyssym
 xev | egrep keysym
 
-# get installed system on disk
 % date, installation
 @ misc, system
+# get installed system on disk
 sudo tune2fs -l <partition> | grep 'Filesystem created:'
 
-# get ssh key fingerprint
 % ssh, fingerprint
 @ misc, system
+# get ssh key fingerprint
 ssh-keygen -lf <pubkey> -E md5
+
+# convert OPENSSH key to RSA key
+ssh-keygen -p -m PEM -f <privkey>
 
 % misc, system
 $ partition: sudo blkid -t TYPE=ext4 | awk '{ print $1 }' | cut -d ':' -f 1
 $ pubkey: ls -1 ~/.ssh/*.pub
+$ privkey: ls -1 ~/.ssh/*
 
 
