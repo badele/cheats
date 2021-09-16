@@ -1,3 +1,7 @@
+% group, system
+# Add group in current user session
+newgrp <groupname>
+
 % network, system
 # Get public ip
 curl ifconfig.me
