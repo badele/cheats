@@ -1,0 +1,13 @@
+% kubernetes, crictl
+
+# Show running docker container
+crictl ps
+
+# Show pods
+crictl pods
+
+# Show docker images
+crictl images
+
+# Show docker containers stats
+crictl stats
