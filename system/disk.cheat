@@ -2,3 +2,6 @@
 
 # Show deleted file, but not not linked (deleted)
 lsof -a +L1
+
+# Show disk utilization by percentage
+df -h | sort -n -k 5
