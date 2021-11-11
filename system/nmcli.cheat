@@ -12,9 +12,9 @@ nmcli radio wifi
 nmcli radio wifi on
 
 # Connect to wifi
-nmcli --ask dev wifi connect <ssid> 
+nmcli dev wifi connect <ssid> password <password>
 
-# Graphical nmcli(TUI)
+# Graphical nmcli wifi manager (TUI)
 nmtui
 
 $ ssid: nmcli -t -f SSID dev wifi | sort
