@@ -4,4 +4,4 @@
 pacman-key --populate archlinux
 
 # Search file
-yay -F <filename>
+yay -Fx <filename>
