@@ -2,3 +2,6 @@
 
 # Update gpg key
 pacman-key --populate archlinux
+
+# Search file
+yay -F <filename>
