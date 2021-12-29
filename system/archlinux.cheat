@@ -1,7 +1,7 @@
 % archlinux, system
 
 # Update gpg key
-pacman-key --populate archlinux
+sudo pacman-key --populate archlinux
 
 # Search file
 yay -Fx <filename>
