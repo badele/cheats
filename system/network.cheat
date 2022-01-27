@@ -1,0 +1,49 @@
+% network, system
+# Get public ip
+curl ifconfig.me
+
+% network, system
+# Get address for interface
+ip a l <interface> | awk '/inet/ {print $2}' | cut -d/ -f1
+
+% network, tailscale
+# Check all hosts ping fail
+IPS=$(tailscale status | awk   '{print $2}') ; for IP in $(echo $IPS); do tailscale ping --c 1 $IP > /dev/null || echo "=== Cant't ping $IP ===" ; done
+
+% network, nmcli
+# List network interfaces
+nmcli dev
+
+@ network, iproute
+# List network interfaces
+ip -j link |jq -r '.[].ifname'
+
+# List SSID
+% network, nmcli
+nmcli dev wifi
+
+# Show radio status
+% network, nmcli
+nmcli radio wifi
+
+# Activate radio
+% network, nmcli
+nmcli radio wifi on
+
+# Connect to wifi
+% network, nmcli
+nmcli --ask dev wifi connect <ssid> 
+
+# Graphical nmcli(TUI)
+% network, nmcli
+nmtui
+
+% network, nmcli
+$ ssid: nmcli -t -f SSID dev wifi | sort
+
+% network, system
+$ interface: ip -j link |jq -r '.[].ifname'
+
+% network, route
+$ show all route
+ip route show table all
