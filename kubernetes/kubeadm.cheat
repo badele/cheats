@@ -1,0 +1,10 @@
+% kubernetes, kubeadm
+
+# Show certificate expiration
+kubeadm alpha certs check-expiration
+
+# Renew all certificates
+kubeadm alpha certs renew all
+
+# Renew certificate
+ kubeadm alpha certs renew <certificate>
