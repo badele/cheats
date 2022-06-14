@@ -1,0 +1,10 @@
+% misc , tool
+
+# web crawler/mirror
+wget --mirror --convert-links --adjust-extension --page-requisites --no-parent <url>
+
+# Show mimetype for file
+xdg-mime query filetype <filename>
+
+# Who launch the application for file type (mime)
+XDG_UTILS_DEBUG_LEVEL=3 xdg-open <filename>
