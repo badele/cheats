@@ -1,7 +1,10 @@
 % archlinux, system
 
 # Update gpg key
-sudo pacman-key --populate archlinux
+yay -S archlinux-keyring && sudo pacman-key --populate archlinux
 
 # Search file
 yay -Fx <filename>
+
+# Remove orphaned or unused package
+yay -Rsn $(yay -Qdtq)
