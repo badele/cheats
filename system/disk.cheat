@@ -6,5 +6,5 @@ lsof -a +L1
 # Show disk utilization sorted by percentage disk usage
 df -h | sort -n -k 5
 
-# Bench disk 10Go
-dd if=/dev/zero of=benchdisk status=progress oflag=direct bs=1M count=10k
+# Bench disk 10Go / [OPTIONS] => oflag=dsync/direct
+dd if=/dev/zero of=benchdisk status=progress oflag=dsync bs=1M count=10k
