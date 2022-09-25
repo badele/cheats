@@ -1,0 +1,14 @@
+% certificate, pri, pub, ssl
+# Show certificat information
+openssl x509 -in <certificate> -text -noout
+
+# Show pub key informations
+openssl rsa -pubin -in <pubkey> -text -noout
+# Show private key informations
+openssl rsa -in <privkey> -text -noout
+
+# Compare certificate and priv key
+openssl x509 -noout -modulus -in <certificate> | openssl sha256 && openssl rsa -noout -modulus -in <privkey> | openssl sha256
+
+# Show website SSL certificate
+echo | openssl s_client -showcerts -servername <website> -connect <website>:443 2>/dev/null | openssl x509 -inform pem -noout -text
