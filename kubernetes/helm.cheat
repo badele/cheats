@@ -1,0 +1,7 @@
+% kubernetes, helm
+
+# Show install manifest
+helm install --dry-run --debug
+
+# Check chart
+helm lint
