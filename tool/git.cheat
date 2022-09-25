@@ -1,0 +1,12 @@
+% git , tool
+
+# delete branch locally
+git branch -d <branch>
+
+# delete branch remotely
+git push origin --delete <branch>
+
+# rename branch
+git branch -m <branch>
+
+$ branch: git branch | awk '{print $NF}'
