@@ -1,8 +1,3 @@
-% group, system
-@ misc, system
-# Add group in current user session
-newgrp <groupname>
-
 % pv, system
 # Count line rate
 pv --line-mode --rate
@@ -35,5 +30,3 @@ ssh-keygen -p -m PEM -f <privkey>
 $ partition: sudo blkid -t TYPE=ext4 | awk '{ print $1 }' | cut -d ':' -f 1
 $ pubkey: ls -1 ~/.ssh/*.pub
 $ privkey: ls -1 ~/.ssh/*
-$ groupname: getent group | cut -d: -f1 | sort
-

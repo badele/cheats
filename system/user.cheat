@@ -1,0 +1,16 @@
+% user, group, system
+
+# list available groups
+getent group | cut -d: -f1 | sort
+
+# List available users
+getent passwd | cut -d: -f1 | sort
+
+# Add user in group
+gpasswd -a <username> <groupname>
+
+# Add group in current user session
+newgrp <groupname>
+
+$ username: getent passwd | cut -d: -f1 | sort
+$ groupname: getent group | cut -d: -f1 | sort
