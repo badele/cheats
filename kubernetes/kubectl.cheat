@@ -1,6 +1,6 @@
 % kubernetes, kubectl
 
-# Merge config
-cp ~/.kube/config ~/.kube/config.bak && KUBECONFIG=~/.kube/config.bak:<configname> kubectl config view --flatten > ~/.kube/config
+# Merge config on the fly
+KUBECONFIG=$(ls -1 ~/.kube/*.yml | tr "\n" ":")
 
 $configname: ls ~/.kube/
