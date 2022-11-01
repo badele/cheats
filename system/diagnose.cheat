@@ -1,0 +1,14 @@
+% diagnose, system
+
+# Get IO disk by process
+iotop
+
+# Find and execute multiple command
+% diagnose, files, system
+find . -name <filename> -exec echo "FILENAME: {}" \; -exec cat {} \;
+
+# Check if systemd service is up
+% diagnose, systemd
+systemctl -q is-active <service> && echo "<service> is up" || echo "<service> is down"
+
+$ service: systemctl -q --type=service | awk '{print $1}'
