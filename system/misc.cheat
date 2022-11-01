@@ -23,6 +23,9 @@ sudo tune2fs -l <partition> | grep 'Filesystem created:'
 # get ssh key fingerprint
 ssh-keygen -lf <pubkey> -E md5
 
+# Show SSH certificate
+ssh-keygen -L -f ~/.ssh/id_rsa-cert.pub
+
 # convert OPENSSH key to RSA key
 ssh-keygen -p -m PEM -f <privkey>
 
