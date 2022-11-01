@@ -6,11 +6,27 @@ getent group | cut -d: -f1 | sort
 # List available users
 getent passwd | cut -d: -f1 | sort
 
-# Add user in group
-gpasswd -a <username> <groupname>
+# Add user
+useradd -m -G <newgroupname>  <newusername>
+
+# Delete User
+userdel <username>
+
+# Add group
+groupadd <newgroupname>
 
 # Add group in current user session
 newgrp <groupname>
+
+# Delete group
+groupdel <groupname>
+
+
+# Add user in group
+gpasswd -a <username> <groupname>
+
+# Delete user from group
+gpasswd -d <username> <groupname>
 
 $ username: getent passwd | cut -d: -f1 | sort
 $ groupname: getent group | cut -d: -f1 | sort
