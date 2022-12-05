@@ -1,0 +1,26 @@
+% network, nmcli
+# List network interfaces
+nmcli dev
+
+# List SSID
+% network, nmcli
+nmcli dev wifi
+
+# Show radio status
+% network, nmcli
+nmcli radio wifi
+
+# Activate radio
+% network, nmcli
+nmcli radio wifi on
+
+# Connect to wifi
+% network, nmcli
+nmcli --ask dev wifi connect <ssid> 
+
+# Graphical nmcli(TUI)
+% network, nmcli
+nmtui
+
+% network, nmcli
+$ ssid: nmcli -t -f SSID dev wifi | sort
