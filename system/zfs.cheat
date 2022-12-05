@@ -1,0 +1,20 @@
+% zfs, disk
+
+# Import pool
+zpool import -f <pool>
+
+# Rename zfz pool
+zpool export <oldpool>
+zpool import <oldpool> <newpool>
+
+
+# Change zfs key
+zfs change-key <pool>
+
+# Show all encryption state
+zfs get encryption
+
+# mount
+zfs load-key <nameofzpool>/<nameofdataset> # load key for a specific dataset
+zfs load-key -a # load all keys
+zfs load-key -r zpool/dataset # load all keys in a dataset
