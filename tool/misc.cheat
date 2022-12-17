@@ -8,3 +8,12 @@ xdg-mime query filetype <filename>
 
 # Who launch the application for file type (mime)
 XDG_UTILS_DEBUG_LEVEL=3 xdg-open <filename>
+
+# pip autoremove dependencies packages (pip install pip-autoremove)
+pip-autoremove
+
+# multiline ripgrep
+rg -lU --multiline-dotall 'firstword.*secondword'
+
+# Show shell key
+showkey -a

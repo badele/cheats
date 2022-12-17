@@ -1,0 +1,86 @@
+% nix
+
+# Install nix-env package
+nix-env -i <pckagename>
+
+# Install nix-env from .nix file
+nix-env -f ~/foo.nix -i '.*'
+
+# Show installed niv-env packages
+nix-env -q
+
+# Upgrade package
+nix-env -u <packagename>
+
+# Upgrade nix-env
+nix-env -u
+
+# Uninstall package on user environment
+nix-env -e <packagename>
+
+# Uninstall all packages on user environment
+nix-env -e '.*'
+
+# Cross compiling
+nixos-rebuild switch -I nixos-config=<configuration.nix> --target-host username@hostname
+
+# Who use the nix store package
+du -sh /nix/store/* | sort -h
+nix-store --query --roots /nix/store/zpj493r0xj24qx6g2k3ygcgl80g3q2wf-qemu-7.1.0
+
+# Evalue le contenu du flake
+nix eval .# (utliser TAB dans le terminal)
+nix repl et :lf .#
+
+# Evaluer dans pkgs
+nix repl et :l
+
+# test du code nix
+#nix repl 
+#  pkgs = import <nixpkgs> {}
+#  pkgs.lib.range 1 5
+
+# flake
+nix registry list
+nix flake check
+nix flake show
+nix develop
+nix build .#packagename
+nix-instantiate --eval <filename.nix>
+
+
+# nix templates
+nix-template config name jonringer
+nix-template config nixpkgs-root /home/jon/projects/nixpkgs
+nix-template python --nixpkgs --pname colout -f pypi -l gpl3
+
+# build package
+cloner pkgs
+nix-build -A python3Packages.aadict
+
+# cachix
+cachix use badele
+nix-build | cachix push badele
+
+# log derivation
+nix log <filename.drv>
+
+###############################################################################
+# Minimal flake devshel version with multiplateform
+###############################################################################
+{
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        packages.hello = pkgs.hello;
+
+        devShell = pkgs.mkShell { buildInputs = [ pkgs.hello pkgs.cowsay ]; };
+      });
+}
+###############################################################################
