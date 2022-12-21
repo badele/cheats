@@ -12,3 +12,6 @@ find . -name <filename> -exec echo "FILENAME: {}" \; -exec cat {} \;
 systemctl -q is-active <service> && echo "<service> is up" || echo "<service> is down"
 
 $ service: systemctl -q --type=service | awk '{print $1}'
+
+# total sum for file content
+awk '{s+=$1} END {print s}'
