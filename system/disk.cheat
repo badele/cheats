@@ -1,5 +1,8 @@
 % disk, file, system
 
+# refresh added new disk
+echo "- - -" > /sys/class/scsi_host/host0/scan
+
 # Show deleted file, but not not linked (deleted)
 lsof -a +L1
 
