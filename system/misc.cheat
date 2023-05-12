@@ -29,6 +29,9 @@ ssh-keygen -L -f ~/.ssh/id_rsa-cert.pub
 # convert OPENSSH key to RSA key
 ssh-keygen -p -m PEM -f <privkey>
 
+# has a passphrase
+cat <ssh_private_key> | grep "Proc-Type" > /dev/null && echo "You have a SSH passphrase" || echo "You haven't SSH passphrasse"
+
 % misc, system
 $ partition: sudo blkid -t TYPE=ext4 | awk '{ print $1 }' | cut -d ':' -f 1
 $ pubkey: ls -1 ~/.ssh/*.pub
