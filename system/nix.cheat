@@ -11,6 +11,7 @@ nix-env -f ~/foo.nix -i '.*'
 
 # Show installed application on your shell
 echo $PATH | tr ":" "\n" | grep -E "/nix/store" | sed -e "s/\/nix\/store\/[a-z0-9]\+\-//g" | sed -e "s/\/.*//g"
+echo $PATH | tr ":" "\n" | grep -E "/nix/store" | sed -e "s/\/nix\/store\/[a-z0-9]\+\-//g" | sed -e "s/\/.*//g" | sed -e "s/\-.*//g" | sort -u | column
 
 # Show system wide informations
 sudo nix-env -p /nix/var/nix/profiles/system --list-generations
