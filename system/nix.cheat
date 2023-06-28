@@ -1,13 +1,34 @@
 % nix
 
+# Show derivation
+nix show-derivation </nix/store/derivation.drv>
+
 # Install nix-env package
-nix-env -i <pckagename>
+nix-env -i packagename
 
 # Install nix-env from .nix file
 nix-env -f ~/foo.nix -i '.*'
 
-# Show installed niv-env packages
+# Show installed application on your shell
+echo $PATH | tr ":" "\n" | grep -E "/nix/store" | sed -e "s/\/nix\/store\/[a-z0-9]\+\-//g" | sed -e "s/\/.*//g"
+
+# Show system wide informations
+sudo nix-env -p /nix/var/nix/profiles/system --list-generations
+sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3
+sudo nixos-rebuild switch --rollback
+nix-store -q --requisites /run/current-system/sw | cut -d- -f2- | sort | uniq
+
+# User profile informations
 nix-env -q
+home-manager generations
+nix profile history
+nix-store -q --requisites ~/.nix-profile | cut -d- -f2- | sort | uniq
+sudo nix-env --list-generations
+sudo nix-env --delete-generations +3
+
+# fetchurl, prefetch
+nix-shell -p nix-prefetch-scripts
+nix-prefetch-git git@github.com:xmikos/qspectrumanalyzer.git --rev v2.2.0
 
 # Upgrade package
 nix-env -u <packagename>
@@ -29,11 +50,13 @@ du -sh /nix/store/* | sort -h
 nix-store --query --roots /nix/store/zpj493r0xj24qx6g2k3ygcgl80g3q2wf-qemu-7.1.0
 
 # Evalue le contenu du flake
-nix eval .# (utliser TAB dans le terminal)
+nix eval .# 
+nix repl .#(utliser TAB dans le terminal)
+
 nix repl et :lf .#
 
 # Evaluer dans pkgs
-nix repl et :l
+nix repl --expr 'import <nixpkgs>{}'
 
 # test du code nix
 #nix repl 
@@ -46,8 +69,14 @@ nix flake check
 nix flake show
 nix develop
 nix build .#packagename
+
+# Show derivation id (ex: /nix/store/filename.drv)
+nix-instantiate default.nix
+
 nix-instantiate --eval <filename.nix>
 
+# Python packages with pyton environment
+nix-shell -p 'python39.withPackages(ps: with ps; [ numpy toolz ])
 
 # nix templates
 nix-template config name jonringer
@@ -84,3 +113,8 @@ nix log <filename.drv>
       });
 }
 ###############################################################################
+
+# write text on derivation
+writeText
+writeTextDir
+writeShellScriptBin
