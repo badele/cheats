@@ -1,5 +1,12 @@
 % nix
 
+# Legacy commands nix-*
+# New commands nix *
+
+# Shell
+nix-shell -p packagename
+nix shell nixpkgs#packagename
+
 # Show derivation
 nix show-derivation </nix/store/derivation.drv>
 
@@ -45,6 +52,9 @@ nix-env -e '.*'
 
 # Cross compiling
 nixos-rebuild switch -I nixos-config=<configuration.nix> --target-host username@hostname
+
+# Show if the binary is in the cache
+curl https://cache.nixos.org/$(nix eval 'nixpkgs#openshot-qt.outPath' | grep -Eo "[a-z0-9]{32}").narinfo
 
 # Who use the nix store package
 du -sh /nix/store/* | sort -h
