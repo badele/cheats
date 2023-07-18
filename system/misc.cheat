@@ -32,6 +32,9 @@ ssh-keygen -p -m PEM -f <privkey>
 # has a passphrase
 cat <ssh_private_key> | grep "Proc-Type" > /dev/null && echo "You have a SSH passphrase" || echo "You haven't SSH passphrasse"
 
+# Delete and keep x files
+ls logs_2023*.gz | sort -r | tail -n +3 | xargs -I {} rm {}
+
 % misc, system
 $ partition: sudo blkid -t TYPE=ext4 | awk '{ print $1 }' | cut -d ':' -f 1
 $ pubkey: ls -1 ~/.ssh/*.pub
