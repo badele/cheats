@@ -32,7 +32,10 @@ home-manager generations
 nix profile history
 nix-store -q --requisites ~/.nix-profile | cut -d- -f2- | sort | uniq
 sudo nix-env --list-generations
-sudo nix-env --delete-generations +3
+
+# Garbage generations
+home-manager expire-generations -30days
+nix-env --delete-generations 30d
 
 # fetchurl, prefetch
 nix-shell -p nix-prefetch-scripts
