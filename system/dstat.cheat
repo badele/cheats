@@ -1,0 +1,16 @@
+% dstat, system
+
+# List all dstat plugins
+dstat --list
+
+# Summarize dstat value during <x> seconds, repeat x times
+dstat <60> <10>
+
+# System summaries
+dstat -cdnpmgs --top-bio --top-cpu --top-mem
+
+# Display the process using most CPU
+dstat --cpu-adv --top-cpu-adv --top-mem --top-bio-adv
+
+# Display the process using most memory
+dstat --mem-adv --top-mem --top-cpu-adv --top-io --top-bio-adv
