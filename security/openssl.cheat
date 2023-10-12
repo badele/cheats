@@ -1,9 +1,10 @@
-% certificate, pri, pub, ssl
+% openssl, ssl, security
 # Show certificat information
 openssl x509 -in <certificate> -text -noout
 
 # Show pub key informations
 openssl rsa -pubin -in <pubkey> -text -noout
+
 # Show private key informations
 openssl rsa -in <privkey> -text -noout
 

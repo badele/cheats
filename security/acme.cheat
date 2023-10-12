@@ -1,0 +1,13 @@
+% acme, network
+
+# Register acme account
+acme.sh --register-account -m <email>
+
+# <domain>.       3600    IN      CNAME   <domainalias>.
+# Generate letencrypt certificate DNS
+acme.sh --issue -d <domain> --challenge-alias <domainalias> --dns <acmednsprovider>
+
+# List all certificates
+acme.sh --list
+
+$ acmednsprovider: curl https://github.com/acmesh-official/acme.sh/tree/master/dnsapi | jq -r '.payload.tree.items[].name'  | grep "dns_" | sed 's/\.sh//g'
