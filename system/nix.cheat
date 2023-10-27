@@ -3,6 +3,21 @@
 # Legacy commands nix-*
 # New commands nix *
 
+# Versions
+nix-shell -p nix-info --run "nix-info -m"
+nixos-version
+nixos-version --hash (hash commit)
+
+# Channels
+nix-channels --list
+nix-channells --update nixpkgs
+NIXVERSION=$(nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version')
+NIXCOMMIT=$(echo $NIXVERSION | grep -oE "[a-z0-9]{12}")
+DATEVERSION=$(curl -sL https://github.com/NixOS/nixpkgs/commit/$NIXCOMMIT | grep -oPm 1 datetime='"(.*?)T.*?"' | grep -oE "[0-9]+-[0-9]+-[0-9]+")
+
+# Synchronise nixos channels and profile version
+nix registry pin nixpkgs github:NixOS/nixpkgs/$(nixos-version --revision)
+
 # Shell
 nix-shell -p packagename
 nix shell nixpkgs#packagename
@@ -35,6 +50,7 @@ sudo nix-env --list-generations
 
 # Garbage generations
 home-manager expire-generations -30days
+nix-collect-garbage --delete-older-than 30d && nixos-rebuild boot
 nix-env --delete-generations 30d
 
 # fetchurl, prefetch
@@ -58,6 +74,9 @@ nixos-rebuild switch -I nixos-config=<configuration.nix> --target-host username@
 
 # Show if the binary is in the cache
 curl https://cache.nixos.org/$(nix eval 'nixpkgs#openshot-qt.outPath' | grep -Eo "[a-z0-9]{32}").narinfo
+
+# Disable cache substituters
+nix develop --substituters "https://nix-community.cachix.org https://cache.nixos.org/"
 
 # Who use the nix store package
 du -sh /nix/store/* | sort -h
@@ -107,6 +126,9 @@ nix-build | cachix push badele
 
 # log derivation
 nix log <filename.drv>
+
+# Search needed lib
+ldd <exename> | cut -d= -f1 | grep -v "(" | awk '{print $1}' | xargs -I _ fd _ /nix/store
 
 ###############################################################################
 # Minimal flake devshel version with multiplateform
