@@ -15,5 +15,11 @@ pip-autoremove
 # multiline ripgrep
 rg -lU --multiline-dotall 'firstword.*secondword'
 
-# Show shell key
+# Show shell key typed
 showkey -a
+
+# select text only with unicode/UTF8 (add -v for reverse)
+grep -axv '.*' FILE
+
+# convert unicode (remove non unicode/UTF8 chars)
+iconv -f utf-8 -t utf-8 -c FILE
