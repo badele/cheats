@@ -1,0 +1,4 @@
+% terraform
+
+# List used modules
+cat modules/modules.json | jq  '.Modules[] | select(.Version != null) | .Key + " " + .Version'
