@@ -52,6 +52,11 @@ sudo nix-env --list-generations
 home-manager expire-generations -30days
 nix-collect-garbage --delete-older-than 30d && nixos-rebuild boot
 nix-env --delete-generations 30d
+# Print nix store usages
+nix-store --gc --print-roots
+# Who use the nix store package
+du -sh /nix/store/* | sort -h
+nix-store --query --roots /nix/store/zpj493r0xj24qx6g2k3ygcgl80g3q2wf-qemu-7.1.0
 
 # fetchurl, prefetch
 nix-shell -p nix-prefetch-scripts
@@ -77,10 +82,6 @@ curl https://cache.nixos.org/$(nix eval 'nixpkgs#openshot-qt.outPath' | grep -Eo
 
 # Disable cache substituters
 nix develop --substituters "https://nix-community.cachix.org https://cache.nixos.org/"
-
-# Who use the nix store package
-du -sh /nix/store/* | sort -h
-nix-store --query --roots /nix/store/zpj493r0xj24qx6g2k3ygcgl80g3q2wf-qemu-7.1.0
 
 # Evalue le contenu du flake
 nix eval .# 
@@ -129,6 +130,12 @@ nix log <filename.drv>
 
 # Search needed lib
 ldd <exename> | cut -d= -f1 | grep -v "(" | awk '{print $1}' | xargs -I _ fd _ /nix/store
+
+# All derivation outputs for flake attribute
+NIXPKGS_ALLOW_BROKEN=1 nix path-info -r --impure --derivation '.#nixosConfigurations.badxps.config.system.build.toplevel' | grep packagename
+
+# Show dependencies for the derivation
+NIXPKGS_ALLOW_BROKEN=1 nix why-depends --impure --derivation '.#nixosConfigurations.badxps.config.system.build.toplevel' /nix/store/wzj79fmyvprwh95bg4yy3rv4gwycaw4z-nvidia-x11-390.157.drv
 
 ###############################################################################
 # Minimal flake devshel version with multiplateform
